@@ -305,7 +305,6 @@ img {
   top: -42px;
   left: 0;
   height: 98px;
-  z-index: 10;
 }
 
 .ipad-pro-uiy .header {
@@ -322,6 +321,7 @@ img {
   border-left-style: none;
   border-color: var(--green-300);
   mix-blend-mode: hard-light;
+  z-index: 10;
 }
 
 .ipad-pro-uiy .logo {
@@ -432,4 +432,5 @@ img {
 }
 
 /* ---top--- */
+
 
