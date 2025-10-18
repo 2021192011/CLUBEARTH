@@ -305,6 +305,7 @@ img {
   top: -42px;
   left: 0;
   height: 98px;
+  z-index: 10;
 }
 
 .ipad-pro-uiy .header {
@@ -431,3 +432,4 @@ img {
 }
 
 /* ---top--- */
+
