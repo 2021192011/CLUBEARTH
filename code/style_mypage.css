@@ -1,0 +1,190 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
+
+* {
+  font-family: 'Pretendard Variable', Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
+
+.ipad-pro-home {
+  background-image: url(img/bg02.jpg);
+  background-repeat: repeat;
+  overflow: hidden;
+  width: 100%;
+  min-height: 900px;
+  min-width: 402px;
+  position: relative;
+}
+
+.mypage_img {
+  mix-blend-mode: hard-light;
+}
+
+.ipad-pro-home .bottom {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -1px;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--green-300);
+  mix-blend-mode: hard-light;
+}
+
+.ipad-pro-home .bottom a {
+  margin-left: 48px;
+}
+.ipad-pro-home a {
+  height: 16px;
+  width: 120.82px;
+  align-self: center;
+  aspect-ratio: 7.55;
+}
+
+.ipad-pro-home .text-wrapper {
+  margin-top: 20px;
+  width: 270px;
+  height: 16px;
+  margin-right: 48px;
+
+  font-weight: 500;
+  color: var(--begie);
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.32px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.ipad-pro-home .main {
+  position: absolute;
+  width: 100%;
+  top: -42px;
+  left: 0;
+  height: 832px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ---top--- */
+
+.ipad-pro-home .top {
+  flex: 1;
+  max-height: 98px;
+  position: relative;
+}
+
+.ipad-pro-home .header {
+  position: absolute;
+  width: 100.13%;
+  height: 56px;
+  top: 42px;
+  left: 0;
+  background-color: transparent;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-width: 1.5px;
+  border-bottom-style: dashed;
+  border-left-style: none;
+  border-color: var(--green-300);
+  mix-blend-mode: hard-light;
+}
+
+.ipad-pro-home .logo-2 {
+  position: absolute;
+  top: calc(50% - 9px);
+  left: 48px;
+  width: 121px;
+  height: 16px;
+  aspect-ratio: 7.55;
+}
+
+.ipad-pro-home .p {
+  top: calc(50% - 8px);
+  left: calc(50% - 48px);
+
+  font-weight: 600;
+  color: var(--green-300);
+  font-size: 14px;
+  letter-spacing: 0.28px;
+  line-height: 14px;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.ipad-pro-home .text-wrapper-3 {
+  letter-spacing: 0.1px;
+}
+
+.ipad-pro-home .text-wrapper-4 {
+  letter-spacing: 1.2px;
+  text-decoration: underline;
+}
+
+.ipad-pro-home .buttons {
+  position: absolute;
+  top: 0;
+  right: 32px;
+  width: 168px;
+  height: 56px;
+}
+
+.ipad-pro-home .button-mypage {
+  display: flex;
+  flex-direction: column;
+  width: 32px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 112px;
+}
+
+.ipad-pro-home .img-2 {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  aspect-ratio: 1;
+}
+
+.ipad-pro-home .union {
+  position: absolute;
+  width: 53.12%;
+  height: 60.94%;
+  top: 18.49%;
+  left: 22.66%;
+}
+
+.ipad-pro-home .button-community {
+  display: flex;
+  flex-direction: column;
+  width: 32px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 55px;
+}
+
+.ipad-pro-home .button-uiy {
+  display: flex;
+  flex-direction: column;
+  width: 32px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* ---top--- */
+
+.ipad-pro-home .bottom address {
+  font-style: normal;
+}
