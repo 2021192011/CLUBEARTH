@@ -1,0 +1,524 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+
+  font-family: 'Pretendard Variable', Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
+body {
+  overflow: hidden;
+}
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}
+.ipad-pro-uiy {
+  overflow: hidden;
+  width: 100%;
+  min-width: 1194px;
+  min-height: 832px;
+  position: relative;
+  background-image: url(img/bg01.jpg);
+  background-repeat: repeat;
+}
+
+.ipad-pro-uiy .background {
+  position: absolute;
+  top: -42px;
+  left: 0;
+  width: 1600px;
+  height: 1067px;
+}
+
+.ipad-pro-uiy .element-canvas-fabric {
+  top: 42px;
+  left: 0;
+  width: 534px;
+  height: 492px;
+  position: absolute;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.ipad-pro-uiy .img {
+  top: 42px;
+  left: 533px;
+  width: 534px;
+  height: 492px;
+  position: absolute;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.ipad-pro-uiy .element-canvas-fabric-2 {
+  top: 42px;
+  left: 1066px;
+  width: 128px;
+  height: 492px;
+  position: absolute;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.ipad-pro-uiy .element-canvas-fabric-3 {
+  top: 533px;
+  left: 1px;
+  width: 534px;
+  height: 341px;
+  position: absolute;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.ipad-pro-uiy .element-canvas-fabric-4 {
+  top: 533px;
+  left: 533px;
+  width: 534px;
+  height: 341px;
+  position: absolute;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.ipad-pro-uiy .element-canvas-fabric-5 {
+  top: 533px;
+  left: 1066px;
+  width: 128px;
+  height: 341px;
+  position: absolute;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.ipad-pro-uiy .button-done {
+  position: absolute;
+  top: 702px;
+  left: calc(50% - 115px);
+  width: 230px;
+  height: 48px;
+  background-color: var(--green-200);
+  border-radius: 100px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.ipad-pro-uiy .text-wrapper {
+  top: calc(50% - 15px);
+  left: calc(50% - 68px);
+
+  font-weight: 700;
+  color: var(--grey-100);
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  line-height: 30px;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.ipad-pro-uiy .frame {
+  position: absolute;
+  top: 10px;
+  left: 190px;
+  width: 28px;
+  height: 28px;
+}
+
+.ipad-pro-uiy .item-1 {
+  position: absolute;
+  width: 25.13%;
+  top: 232px;
+  left: 9.63%;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.select_img {
+  display: none;
+}
+
+.ipad-pro-uiy .select_img {
+  display: none; /* 뒷면(이미지)은 기본적으로 숨깁니다. */
+  width: 100%; /* 너비를 꽉 채우도록 설정 */
+  height: 100%; /* 높이를 꽉 채우도록 설정 */
+  object-fit: cover; /* 이미지가 영역에 맞게 꽉 차도록 */
+  border-radius: 40px; /* 부모와 동일하게 설정 */
+  transform: rotateY(180deg);
+}
+
+/* 2. 클릭 시 (is-flipped 클래스가 추가될 때) */
+.ipad-pro-uiy .item-1.is-flipped .select_img,
+.ipad-pro-uiy .item-2.is-flipped .select_img,
+.ipad-pro-uiy .item-3.is-flipped .select_img {
+  display: block; /* 뒷면(이미지)을 보이게 합니다. */
+}
+
+.ipad-pro-uiy .item-1.is-flipped .before,
+.ipad-pro-uiy .item-2.is-flipped .before,
+.ipad-pro-uiy .item-3.is-flipped .before {
+  display: none; /* 앞면(라벨)을 숨깁니다. */
+}
+
+.ipad-pro-uiy .before {
+  margin-top: 32px;
+  width: 262px;
+  height: 348px;
+  margin-left: 2px;
+  position: relative;
+}
+
+.ipad-pro-uiy .item-1,
+.ipad-pro-uiy .item-2,
+.ipad-pro-uiy .item-3 {
+  transition: transform 0.3s;
+  transform: perspective(800px) rotateY(0deg);
+}
+.ipad-pro-uiy .item-1.is-flipped,
+.ipad-pro-uiy .item-2.is-flipped,
+.ipad-pro-uiy .item-3.is-flipped {
+  border: dashed 2px var(--green-200);
+  transform: perspective(800px) rotateY(180deg) rotate(3deg);
+}
+
+.ipad-pro-uiy .model {
+  position: absolute;
+  top: 24px;
+  left: calc(50% - 131px);
+  width: 260px;
+  height: 260px;
+  aspect-ratio: 1;
+  background-image: url(https://c.animaapp.com/acujdZT9/img/img-card-1@2x.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.ipad-pro-uiy .div {
+  position: absolute;
+  top: 324px;
+  left: calc(50% - 36px);
+  font-family: 'Pretendard Variable-SemiBold', Helvetica;
+  font-weight: 600;
+  color: var(--grey-700);
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.ipad-pro-uiy .button-select-before {
+  position: absolute;
+  top: 0;
+  left: 216px;
+  width: 32px;
+  height: 32px;
+  border-radius: 100px;
+  border: 2px solid;
+  border-color: var(--grey-300);
+  aspect-ratio: 1;
+}
+
+.ipad-pro-uiy .item-2 {
+  position: absolute;
+  width: 25.13%;
+  top: 232px;
+  left: 37.44%;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.ipad-pro-uiy .model-2 {
+  background-image: url(https://c.animaapp.com/acujdZT9/img/img-string-1@2x.png);
+  background-size: cover;
+  background-position: 50% 50%;
+  position: absolute;
+  top: 24px;
+  left: calc(50% - 131px);
+  width: 260px;
+  height: 260px;
+  aspect-ratio: 1;
+}
+
+.ipad-pro-uiy .item-3 {
+  position: absolute;
+  width: 25.13%;
+  top: 232px;
+  left: 65.24%;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.ipad-pro-uiy .img-mini-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 24px;
+  left: calc(50% - 131px);
+  width: 260px;
+  height: 260px;
+  aspect-ratio: 1;
+}
+
+.ipad-pro-uiy .img-mini {
+  margin-top: -11.6px;
+  height: 239.78px;
+  margin-left: 0;
+  width: 239.78px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.ipad-pro-uiy .text-wrapper-2 {
+  top: 324px;
+  left: calc(50% - 27px);
+  font-family: 'Pretendard Variable-SemiBold', Helvetica;
+  font-weight: 600;
+  color: var(--grey-700);
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  line-height: 24px;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.ipad-pro-uiy .text-wrapper-3 {
+  top: 148px;
+  left: calc(50% - 122px);
+  font-family: 'Pretendard Variable-SemiBold', Helvetica;
+  font-weight: 600;
+  color: var(--green-200);
+  font-size: 24px;
+  letter-spacing: 0.48px;
+  line-height: 36px;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.ipad-pro-uiy .steps {
+  position: absolute;
+  top: 103px;
+  left: calc(50% - 59px);
+  width: 118px;
+  height: 22px;
+}
+
+.ipad-pro-uiy .main {
+  position: absolute;
+  width: 100%;
+  top: -42px;
+  left: 0;
+  height: 832px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ---top--- */
+
+.ipad-pro-uiy .top {
+  position: absolute;
+  width: 100%;
+  top: -42px;
+  left: 0;
+  height: 98px;
+  mix-blend-mode: hard-light;
+}
+
+.ipad-pro-uiy .header {
+  position: absolute;
+  width: 100.13%;
+  height: 58.67%;
+  top: 42.09%;
+  left: 0;
+  background-color: transparent;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-width: 1.5px;
+  border-bottom-style: dashed;
+  border-left-style: none;
+  border-color: var(--green-300);
+  mix-blend-mode: hard-light;
+}
+
+.ipad-pro-uiy .logo {
+  position: absolute;
+  top: calc(50% - 9px);
+  left: 48px;
+  width: 121px;
+  height: 16px;
+  aspect-ratio: 7.55;
+}
+
+.ipad-pro-uiy .p {
+  top: calc(50% - 8px);
+  left: calc(50% - 48px);
+  font-weight: 600;
+  color: var(--green-300);
+  font-size: 14px;
+  letter-spacing: 0.28px;
+  line-height: 14px;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.ipad-pro-uiy .span {
+  letter-spacing: 0.04px;
+}
+
+.ipad-pro-uiy .text-wrapper-4 {
+  letter-spacing: 0.04px;
+  text-decoration: underline;
+}
+
+.ipad-pro-uiy .buttons {
+  position: absolute;
+  top: 0;
+  right: 36px;
+  width: 168px;
+  height: 56px;
+}
+
+.ipad-pro-uiy .button-mypage {
+  display: flex;
+  flex-direction: column;
+  width: 56px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  position: absolute;
+  top: 0;
+  left: 112px;
+}
+
+.ipad-pro-uiy .img-wrapper {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  aspect-ratio: 1;
+}
+
+.ipad-pro-uiy .union {
+  position: absolute;
+  width: 53.12%;
+  height: 60.94%;
+  top: 18.49%;
+  left: 22.66%;
+}
+
+.ipad-pro-uiy .button-community {
+  display: flex;
+  flex-direction: column;
+  width: 56px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  position: absolute;
+  top: 0;
+  left: 55px;
+}
+
+.ipad-pro-uiy .button-uiy {
+  display: flex;
+  flex-direction: column;
+  width: 56px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ipad-pro-uiy .exclude {
+  position: absolute;
+  width: 62.5%;
+  height: 62.5%;
+  top: 18.75%;
+  left: 18.75%;
+}
+
+/* ---top--- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.product-selection {
+  position: absolute;
+  width: 100%;
+  top: 148px;
+  left: 0;
+}
+
+.product-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2.5%;
+  margin-top: 84px;
+}
+
+.button-done {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0;
+}
+
+.button-done:active {
+  opacity: 0.5;
+  scale: calc(0.95);
+  transition: 0.1s;
+}
+
+.button-mypage,
+.button-community,
+.button-uiy {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.header a {
+  display: inline-block;
+}
+
+.header a:focus-visible {
+  outline: 2px solid var(--green-200);
+  outline-offset: 4px;
+  border-radius: 4px;
+}

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+    <style>
+      body {
+        background-image: url('img/bg01.jpg');
+      }
+
+      #customize {
+        width: 296px;
+        height: 600px;
+        margin: 120px 0 auto auto;
+        padding: 0;
+
+        box-sizing: border-box;
+        position: relative;
+
+        z-index: 9;
+      }
+      .label {
+        width: 120px;
+        height: 32px;
+        rotate: 270deg;
+        background-color: #fff;
+        color: #9999a1;
+        border-radius: 15px 15px 0px 0px;
+        box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.08);
+        font-size: 12px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 44px;
+        right: 220px;
+      }
+      .con-customize {
+        width: 264px;
+        height: 618px;
+        margin: 0;
+
+        background-color: #fff;
+        box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.08);
+        border-radius: 40px 0px 0px 0px;
+
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      }
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        list-style: none;
+
+        padding: 32px;
+        margin: 0;
+        gap: 8px;
+        border-bottom: 1px solid #e6e6e9;
+
+        font-size: 14px;
+      }
+      li {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 2px solid #e6e6e9;
+        background-size: cover;
+      }
+      .con-customize .title {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 8px;
+      }
+      .color-picker-wrapper {
+        background-image: url('img/color-bg.jpg');
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        border: 2px solid #e6e6e9;
+      }
+      .color-picker-wrapper input[type='color'] {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .upload-wrapper {
+        background-image: url('img/texture-bg-04.jpg'); /* 원하는 이미지 경로 */
+        background-size: cover;
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        border: 2px solid #e6e6e9;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .upload-wrapper input[type='file'] {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      /* ----------------------- */
+      #image-editor {
+        width: 550px;
+        height: 694px;
+        padding: 36px;
+        background-color: #fff;
+
+        box-sizing: border-box;
+        border-radius: 40px 40px 0px 0px;
+        box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.08);
+
+        display: none;
+        position: absolute;
+        bottom: 0;
+        left: 25%;
+
+        z-index: 10;
+      }
+
+      .image-container {
+        margin: 24px auto;
+        width: 480px;
+        height: 480px;
+        overflow: hidden;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      .editor-title {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        width: 100%;
+        height: 32px;
+      }
+      .editor-title p {
+        width: 65%;
+      }
+
+      #back {
+        width: 24px;
+        height: 24px;
+        background: none;
+        border: none;
+      }
+      #done {
+        width: 168px;
+        height: 48px;
+        color: #fff;
+        background: #3a8063;
+        border-radius: 50px;
+        border: none;
+
+        display: flex;
+        justify-content: center;
+
+        align-items: center;
+      }
+      #rotate {
+        width: 56px;
+        height: 56px;
+        background: #f4f4f6;
+        border-radius: 50px;
+        border: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+
+  <!-- ----------------------------------------------------------------- -->
+
+  <body>
+    <div id="image-editor">
+      <div class="editor-title">
+        <p>패턴이 잘 보이도록 잘라주세요!</p>
+        <button id="back">X</button>
+      </div>
+      <div class="image-container">
+        <img id="image" />
+      </div>
+
+      <div class="buttons">
+        <button id="rotate">회전</button>
+        <button id="done">적용</button>
+      </div>
+    </div>
+
+    <div id="customize">
+      <div class="label">customize</div>
+      <div class="con-customize">
+        <ul>
+          <div class="title">색상</div>
+          <li class="color-picker-wrapper">
+            <input type="color" id="color_picker" />
+          </li>
+          <li class="color-black" style="background-color: #222"></li>
+          <li class="color-white" style="background-color: #fff"></li>
+          <li class="color-red" style="background-color: #ff6868"></li>
+          <li class="color-orange" style="background-color: #ffb74b"></li>
+          <li class="color-lemon" style="background-color: #fffd87"></li>
+          <li class="color-green" style="background-color: #76d97c"></li>
+          <li class="color-blue" style="background-color: #6aa3ff"></li>
+          <li class="color-purple" style="background-color: #c68cf9"></li>
+        </ul>
+        <ul>
+          <div class="title">패턴</div>
+          <li
+            class="texture-denim"
+            style="background-image: url(img/texture-bg-01.jpg)"
+          ></li>
+          <li
+            class="texture-wool"
+            style="background-image: url(img/texture-bg-02.jpg)"
+          ></li>
+          <li
+            class="texture-cotton"
+            style="background-image: url(img/texture-bg-03.jpg)"
+          ></li>
+        </ul>
+        <ul>
+          <div class="title">패턴 직접 적용</div>
+          <li class="upload-wrapper">
+            <input type="file" id="image_upload" accept="image/*" />
+          </li>
+          <li style="background-image: url(img/texture-bg-05.jpg)"></li>
+        </ul>
+      </div>
+    </div>
+
+    <a-scene style="z-index: -10">
+      <a-assets>
+        <a-asset-item id="cardcase" src="cardcase.glb"></a-asset-item>
+      </a-assets>
+      <a-gltf-model
+        id="model"
+        src="#cardcase"
+        position="0 2 -10"
+        scale="0.7 0.7 0.7"
+      ></a-gltf-model>
+    </a-scene>
+  </body>
+
+  <!-- ----------------------------------------------------------------- -->
+
+  <script>
+    let model = document.querySelector('#model')
+
+    let imageUpload = document.querySelector('#image_upload')
+    let image = document.querySelector('#image')
+
+    let imageEditor = document.querySelector('#image-editor')
+    let doneButton = document.querySelector('#done')
+    let rotateButton = document.querySelector('#rotate')
+
+    let cropper
+
+    // 색상 선택
+    let colorPicker = document.querySelector('#color_picker')
+    colorPicker.addEventListener('input', function (e) {
+      let selectedColor = e.target.value
+      let part = model.object3D.getObjectByName('uiy')
+
+      if (part) {
+        part.material.map = null // 텍스처 제거
+        part.material.color.set(selectedColor)
+      }
+    })
+
+    colorPicker.addEventListener('click', function (e) {
+      e.stopPropagation()
+    })
+
+    // 색상 적용
+    document.querySelectorAll('.con-customize li').forEach((li) => {
+      li.addEventListener('click', () => {
+        const bgColor = window.getComputedStyle(li).backgroundColor
+
+        // 배경 이미지가 있는 경우는 패턴이므로 제외
+        if (window.getComputedStyle(li).backgroundImage !== 'none') return
+
+        const part = model.object3D.getObjectByName('uiy')
+        if (part) {
+          part.material.map = null // 텍스처 제거
+          part.material.color.set(bgColor)
+        }
+      })
+    })
+
+    // 텍스처 적용
+    function applyTexture(imgPath) {
+      const texture = new THREE.TextureLoader().load(imgPath, function () {
+        const part = model.object3D.getObjectByName('uiy')
+        if (part) {
+          texture.wrapS = THREE.RepeatWrapping
+          texture.wrapT = THREE.RepeatWrapping
+          texture.flipY = false
+
+          part.material.map = texture
+          part.material.map.needsUpdate = true
+        }
+      })
+    }
+
+    // 각각 텍스처 버튼에 적용
+    document.querySelector('.texture-denim').addEventListener('click', () => {
+      applyTexture('img/texture-01.jpg')
+    })
+
+    document.querySelector('.texture-wool').addEventListener('click', () => {
+      applyTexture('img/texture-02.jpg')
+    })
+
+    document.querySelector('.texture-cotton').addEventListener('click', () => {
+      applyTexture('img/texture-03.jpg')
+    })
+
+    // 이미지 에디터 표시
+    imageUpload.addEventListener('change', function (e) {
+      let file = e.target.files[0]
+      let reader = new FileReader()
+
+      reader.onload = function (evt) {
+        image.src = evt.target.result
+
+        // 기존의 에디터가 있으면 제거 후 새로 생성
+        if (cropper) cropper.destroy()
+        cropper = new Cropper(image, {
+          aspectRatio: 1,
+          viewMode: 1,
+          autoCropArea: 0.8,
+        })
+
+        imageEditor.style.display = 'block'
+        rotateButton.style.display = 'block'
+        doneButton.style.display = 'block'
+      }
+
+      reader.readAsDataURL(file) // 파일을 URL로 읽기
+    })
+
+    // 회전 버튼 기능 구현
+    rotateButton.addEventListener('click', function () {
+      if (cropper) {
+        cropper.rotate(90)
+      }
+    })
+
+    // 크롭한 이미지를 모델에 적용
+    doneButton.addEventListener('click', function () {
+      if (cropper) {
+        let croppedCanvas = cropper.getCroppedCanvas()
+
+        // 캔버스를 Blob으로 변환 (Blob: 2진수 데이터)
+        croppedCanvas.toBlob(function (blob) {
+          let texture = new THREE.TextureLoader().load(
+            URL.createObjectURL(blob),
+            function () {
+              let part = model.object3D.getObjectByName('uiy') // 모델에 해당 파트가 있는지 확인
+              if (part) {
+                texture.wrapS = THREE.RepeatWrapping // UV 맵 유지
+                texture.wrapT = THREE.RepeatWrapping
+                texture.flipY = false
+
+                if (part) {
+                  part.material.map = texture
+                  part.material.map.needsUpdate = true
+                }
+              }
+            }
+          )
+        })
+      }
+    })
+
+    // 에디터 닫기
+    let backButton = document.querySelector('#back')
+
+    backButton.addEventListener('click', function () {
+      document.querySelector('#image-editor').style.display = 'none'
+    })
+  </script>
+</html>
