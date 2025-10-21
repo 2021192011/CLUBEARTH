@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+    <link rel="stylesheet" href="styleguide.css" />
+    <link rel="stylesheet" href="style_uiy_simulator.css" />
+  </head>
+
+  <body>
+    <main class="ipad-pro-uiy">
+      <div class="top">
+        <header class="header">
+          <a href="index.html" aria-label="ClubEarth 홈으로 이동">
+            <img
+              class="logo"
+              src="https://c.animaapp.com/acujdZT9/img/logo-1.svg"
+              alt="ClubEarth"
+            />
+          </a>
+          <a href="mypage.html"
+            ><p class="p">
+              <span class="span">반가워요, </span>
+              <span class="text-wrapper-4">부원</span>
+              <span class="span">님</span>
+            </p></a
+          >
+
+          <nav class="buttons" aria-label="주요 메뉴">
+            <a href="mypage.html"
+              ><button class="button-mypage" aria-label="마이페이지">
+                <span class="img-wrapper"
+                  ><img
+                    class="union"
+                    src="https://c.animaapp.com/acujdZT9/img/union-3.svg"
+                    alt=""
+                /></span></button
+            ></a>
+            <a href="community.html"
+              ><button class="button-community" aria-label="커뮤니티">
+                <img
+                  class="img-wrapper"
+                  src="https://c.animaapp.com/acujdZT9/img/icon-communityoff-2.svg"
+                  alt=""
+                /></button
+            ></a>
+            <a href="uiy_select.html"
+              ><button
+                class="button-uiy"
+                aria-label="제작하기"
+                aria-current="page"
+              >
+                <span class="img-wrapper">
+                  <img class="exclude" src="img/icon_uiy.png" alt="" />
+                </span></button
+            ></a>
+          </nav>
+        </header>
+      </div>
+    </main>
+
+    <!-- ---top end--- -->
+
+    <h1 id="selection-heading" class="text-wrapper-3">
+      어떤 것을 제작해 볼까요?
+    </h1>
+    <nav class="steps" aria-label="진행 단계">
+      <img src="img/steps_02.png" alt="4단계 중 2단계" />
+    </nav>
+
+    <div id="image-editor">
+      <div class="editor-title">
+        <p>패턴이 잘 보이도록 잘라주세요!</p>
+        <button id="back">X</button>
+      </div>
+      <div class="image-container">
+        <img id="image" />
+      </div>
+
+      <div class="buttons">
+        <button id="rotate">회전</button>
+        <button id="done">적용</button>
+      </div>
+    </div>
+
+    <div id="webcam">
+      <div class="webcam-title">
+        <p>패턴이 잘 보이도록 촬영해 주세요</p>
+        <button id="back">X</button>
+      </div>
+      <div class="camera-container">
+        <video id="cameraview" width="720" height="480"></video>
+      </div>
+
+      <div class="buttons">
+        <button id="capture"></button>
+      </div>
+    </div>
+
+    <div class="info">
+      <div class="info_con">
+        <img src="img/info_01.jpg" />
+      </div>
+      <div class="label">Iinformation</div>
+    </div>
+    <div id="customize">
+      <div class="label">customize</div>
+      <div class="con-customize">
+        <ul>
+          <div class="title">색상</div>
+          <li class="color-picker-wrapper">
+            <input type="color" id="color_picker" />
+          </li>
+          <li class="color-black" style="background-color: #222"></li>
+          <li class="color-white" style="background-color: #fff"></li>
+          <li class="color-red" style="background-color: #ff6868"></li>
+          <li class="color-orange" style="background-color: #ffb74b"></li>
+          <li class="color-lemon" style="background-color: #fffd87"></li>
+          <li class="color-green" style="background-color: #76d97c"></li>
+          <li class="color-blue" style="background-color: #6aa3ff"></li>
+          <li class="color-purple" style="background-color: #c68cf9"></li>
+        </ul>
+        <ul>
+          <div class="title">패턴</div>
+          <li
+            class="texture-denim"
+            style="background-image: url(img/texture-bg-01.jpg)"
+          ></li>
+          <li
+            class="texture-wool"
+            style="background-image: url(img/texture-bg-02.jpg)"
+          ></li>
+          <li
+            class="texture-cotton"
+            style="background-image: url(img/texture-bg-03.jpg)"
+          ></li>
+        </ul>
+        <ul>
+          <div class="title">패턴 직접 적용</div>
+          <li class="upload-wrapper">
+            <input type="file" id="image_upload" accept="image/*" />
+          </li>
+          <li
+            class="camera"
+            style="background-image: url(img/texture-bg-05.jpg)"
+          ></li>
+        </ul>
+      </div>
+    </div>
+
+    <a-scene
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <a-asset-item id="cardcase" src="cardcase.glb"></a-asset-item>
+      </a-assets>
+
+      <a-entity
+        camera
+        position="0 1.6 -2"
+        look-controls="enabled: false"
+      ></a-entity>
+
+      <a-gltf-model
+        id="model"
+        src="#cardcase"
+        position="0 1 -10"
+        scale="0.7 0.7 0.7"
+      ></a-gltf-model>
+    </a-scene>
+  </body>
+
+  <!-- ----------------------------------------------------------------- -->
+
+  <script>
+    let model = document.querySelector('#model')
+    let imageUpload = document.querySelector('#image_upload')
+    let image = document.querySelector('#image')
+    let imageEditor = document.querySelector('#image-editor')
+    let doneButton = document.querySelector('#done')
+    let rotateButton = document.querySelector('#rotate')
+    let cropper // 색상 선택
+
+    let colorPicker = document.querySelector('#color_picker')
+    colorPicker.addEventListener('input', function (e) {
+      let selectedColor = e.target.value
+      let part = model.object3D.getObjectByName('uiy')
+      if (part) {
+        part.material.map = null
+        part.material.color.set(selectedColor)
+      }
+    })
+    colorPicker.addEventListener('click', function (e) {
+      e.stopPropagation()
+    })
+
+    // 색상 적용
+    document.querySelectorAll('.con-customize li').forEach((li) => {
+      li.addEventListener('click', () => {
+        const bgColor = window.getComputedStyle(li).backgroundColor
+        if (window.getComputedStyle(li).backgroundImage !== 'none') return
+        const part = model.object3D.getObjectByName('uiy')
+        if (part) {
+          part.material.map = null
+          part.material.color.set(bgColor)
+        }
+      })
+    })
+
+    // 텍스처 적용
+    function applyTexture(imgPath) {
+      const texture = new THREE.TextureLoader().load(imgPath, function () {
+        const part = model.object3D.getObjectByName('uiy')
+        if (part) {
+          texture.wrapS = THREE.RepeatWrapping
+          texture.wrapT = THREE.RepeatWrapping
+          texture.flipY = false
+          part.material.map = texture
+          part.material.map.needsUpdate = true
+        }
+      })
+    }
+
+    // 각각 텍스처 버튼에 적용
+    document.querySelector('.texture-denim').addEventListener('click', () => {
+      applyTexture('img/texture-01.jpg')
+    })
+    document.querySelector('.texture-wool').addEventListener('click', () => {
+      applyTexture('img/texture-02.jpg')
+    })
+    document.querySelector('.texture-cotton').addEventListener('click', () => {
+      applyTexture('img/texture-03.jpg')
+    }) // 이미지 에디터 표시 (파일 업로드)
+
+    imageUpload.addEventListener('change', function (e) {
+      let file = e.target.files[0]
+      let reader = new FileReader()
+      reader.onload = function (evt) {
+        image.src = evt.target.result
+        if (cropper) cropper.destroy()
+        cropper = new Cropper(image, {
+          aspectRatio: 1,
+          viewMode: 1,
+          autoCropArea: 0.8,
+        })
+        imageEditor.classList.add('is-visible')
+        rotateButton.style.display = 'block'
+        doneButton.style.display = 'block'
+      }
+      reader.readAsDataURL(file)
+    })
+
+    // ❗️❗️ [구조 수정] 버튼 리스너들은 최상위 레벨에 있어야 합니다. ❗️❗️
+
+    // 회전 버튼
+    rotateButton.addEventListener('click', function () {
+      if (cropper) {
+        cropper.rotate(90)
+      }
+    })
+
+    // 크롭 적용 버튼
+    doneButton.addEventListener('click', function () {
+      if (cropper) {
+        let croppedCanvas = cropper.getCroppedCanvas()
+        croppedCanvas.toBlob(function (blob) {
+          let texture = new THREE.TextureLoader().load(
+            URL.createObjectURL(blob),
+            function () {
+              let part = model.object3D.getObjectByName('uiy')
+              if (part) {
+                texture.wrapS = THREE.RepeatWrapping
+                texture.wrapT = THREE.RepeatWrapping
+                texture.flipY = false
+                if (part) {
+                  part.material.map = texture
+                  part.material.map.needsUpdate = true
+                }
+              }
+            }
+          )
+          _B__
+        })
+      }
+      imageEditor.classList.remove('is-visible')
+    })
+
+    // 에디터 닫기 (X 버튼)
+    let backButton = document.querySelector('#image-editor #back')
+    backButton.addEventListener('click', function () {
+      imageEditor.classList.remove('is-visible')
+    })
+
+    // A-Frame 모델 드래그 회전
+    document.addEventListener('DOMContentLoaded', () => {
+      const sceneEl = document.querySelector('a-scene')
+      const modelEl = document.querySelector('#model')
+      sceneEl.style.zIndex = '1'
+      sceneEl.addEventListener('loaded', () => {
+        const canvas = sceneEl.canvas
+        if (!canvas) {
+          console.warn('A-Frame canvas not found.')
+          return
+        }
+        canvas.style.touchAction = 'none'
+        let isDragging = false
+        let lastX = 0
+        let lastY = 0
+        let rotation = { x: 0, y: 0 }
+        const SENSITIVITY = 1
+        function startDrag(clientX, clientY) {
+          isDragging = true
+          lastX = clientX
+          lastY = clientY
+        }
+        function moveDrag(clientX, clientY) {
+          if (!isDragging) return
+          const dx = clientX - lastX
+          const dy = clientY - lastY
+          rotation.y += dx * SENSITIVITY
+          rotation.x += dy * SENSITIVITY
+          rotation.x = Math.max(Math.min(rotation.x, 80), -80)
+          if (modelEl) {
+            modelEl.setAttribute('rotation', `${-rotation.x} ${rotation.y} 0`)
+          }
+          lastX = clientX
+          lastY = clientY
+        }
+        function endDrag() {
+          isDragging = false
+        }
+        canvas.addEventListener('mousedown', (e) =>
+          startDrag(e.clientX, e.clientY)
+        )
+        window.addEventListener('mousemove', (e) =>
+          moveDrag(e.clientX, e.clientY)
+        )
+        window.addEventListener('mouseup', endDrag)
+        canvas.addEventListener('touchstart', (e) => {
+          if (e.touches.length === 1) {
+            startDrag(e.touches[0].clientX, e.touches[0].clientY)
+          }
+        })
+        canvas.addEventListener('touchmove', (e) => {
+          if (e.touches.length === 1) {
+            moveDrag(e.touches[0].clientX, e.touches[0].clientY)
+          }
+        })
+        canvas.addEventListener('touchend', endDrag)
+        canvas.addEventListener('touchcancel', endDrag)
+      })
+    })
+
+    // -------카메라 (수정된 버전)-------
+
+    // 1. 필요한 변수들을 모두 선언합니다.
+    const cameraButton = document.querySelector('.camera')
+    const webcamPopup = document.querySelector('#webcam')
+    const backButtons = document.querySelectorAll('#webcam #back')
+    const cameraView = document.querySelector('#cameraview')
+    const shutterButton = document.querySelector('#capture')
+    const canvas = document.createElement('canvas')
+    let stream
+
+    // 2. 팝업 열기 + 카메라 시작
+    cameraButton.addEventListener('click', async () => {
+      webcamPopup.style.display = 'block'
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: true })
+        cameraView.srcObject = stream
+        await cameraView.play()
+      } catch (err) {
+        alert('카메라를 사용할 수 없습니다.')
+        console.error(err)
+      }
+    })
+
+    // 3. 팝업 닫기 버튼 (웹캠 팝업용)
+    backButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        webcamPopup.style.display = 'none'
+        stopCamera()
+      })
+    })
+
+    // 4. 카메라 정지 함수
+    function stopCamera() {
+      if (stream) {
+        const tracks = stream.getTracks()
+        tracks.forEach((t) => t.stop())
+        stream = null
+      }
+      cameraView.srcObject = null
+    }
+
+    // 5. 📸 촬영 버튼 클릭 시
+    shutterButton.addEventListener('click', () => {
+      if (!stream) return
+      const video = cameraView
+      const width = video.videoWidth
+      const height = video.videoHeight
+      canvas.width = width
+      canvas.height = height
+      const ctx = canvas.getContext('2d')
+      ctx.translate(width, 0)
+      ctx.scale(-1, 1)
+      ctx.drawImage(video, 0, 0, width, height)
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
+      const imageDataUrl = canvas.toDataURL('image/png')
+      webcamPopup.style.display = 'none'
+      stopCamera() // const imageEditor = document.querySelector('#image-editor') // (이미 맨 위에 선언됨) // const image = document.querySelector('#image') // (이미 맨 위에 선언됨)
+
+      // 📌 Cropper 화면에 이미지 적용
+      image.src = imageDataUrl
+      if (cropper) cropper.destroy()
+      cropper = new Cropper(image, {
+        aspectRatio: 1,
+        viewMode: 1,
+        autoCropArea: 0.8,
+      })
+
+      imageEditor.classList.add('is-visible')
+    })
+  </script>
+</html>
