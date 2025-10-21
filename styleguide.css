@@ -1,4 +1,5 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
 
 :root {
   --green-100: rgba(113, 172, 128, 1);
@@ -15,3 +16,4 @@
   --shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.08);
   --d: 0px 2.485882520675659px 24.85882568359375px 0px rgba(188, 179, 207, 0.2);
 }
+
