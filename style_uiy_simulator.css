@@ -169,7 +169,7 @@ a:visited {
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.08);
   font-size: 12px;
   font-family: 'Pretendard Variable' !important;
-  font-weight: 500;
+  font-weight: 600;
 
   display: flex;
   align-items: center;
@@ -251,6 +251,8 @@ li {
   width: 100%;
   margin-bottom: 8px;
   color: var(--grey-500);
+  font-size: 14px;
+  font-weight: 500;
 }
 .color-picker-wrapper {
   background-image: url('img/color-bg.jpg');
