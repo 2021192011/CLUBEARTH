@@ -1,9 +1,185 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<!DOCTYPE html>    
+<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+    <link rel="stylesheet" href="styleguide.css" />
+    <link rel="stylesheet" href="style_uiy_guide.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body></body>
+  <body>
+    <main class="ipad-pro-uiy">
+      <div class="top">
+        <header class="header">
+          <a href="index.html" aria-label="ClubEarth 홈으로 이동">
+            <img
+              class="logo"
+              src="https://c.animaapp.com/acujdZT9/img/logo-1.svg"
+              alt="ClubEarth"
+            />
+          </a>
+          <a href="mypage.html"
+            ><p class="p">
+              <span class="span">반가워요, </span>
+              <span class="text-wrapper-4">부원</span>
+              <span class="span">님</span>
+            </p></a
+          >
+
+          <nav class="buttons" aria-label="주요 메뉴">
+            <a href="mypage.html"
+              ><button class="button-mypage" aria-label="마이페이지">
+                <span class="img-wrapper"
+                  ><img
+                    class="union"
+                    src="https://c.animaapp.com/acujdZT9/img/union-3.svg"
+                    alt=""
+                /></span></button
+            ></a>
+            <a href="community.html"
+              ><button class="button-community" aria-label="커뮤니티">
+                <img
+                  class="img-wrapper"
+                  src="https://c.animaapp.com/acujdZT9/img/icon-communityoff-2.svg"
+                  alt=""
+                /></button
+            ></a>
+            <a href="uiy_select.html"
+              ><button
+                class="button-uiy"
+                aria-label="제작하기"
+                aria-current="page"
+              >
+                <span class="img-wrapper">
+                  <img class="exclude" src="img/icon_uiy.png" alt="" />
+                </span></button
+            ></a>
+          </nav>
+        </header>
+      </div>
+    </main>
+<!-- ---top end--- -->
+    <h1>
+      시작하기 전에,<br>내 원단에 <span>재단 가이드</span>를 비교해 보세요!
+    </h1>
+    <nav class="steps" aria-label="진행 단계">
+      <img src="img/steps_03.png" alt="4단계 중 3단계" />
+    </nav>
+    <img src="img/guide.png" class="guide_img" alt="가이드 사용방법">
+
+    
+    <div class="bottom_buttons">
+      <a href="uiy_simulator.html">
+        <button class="back">
+          <img src="img/icon_more.png" />
+          <p>BACK</p>
+        </button></a
+      >
+        <button class="camera">
+          <p>재단 도움 받기</p>
+          <img
+            src="https://c.animaapp.com/acujdZT9/img/frame-357.svg"
+            alt=""
+          /></button
+      ></a>
+
+      <a href="uiy_manual.html">
+        <button class="skip">
+          <p>SKIP</p>
+          <img src="img/icon_more.png" /></button
+      ></a>
+    </div>
+
+    <div id="webcam">
+      <div class="webcam-title">
+        <p>재단가이드</p>
+        <button id="back"><img src="img/icon_close.png" /></button>
+      </div>
+      <div class="camera-container">
+        <img src="img/guide_line.png">
+        <video id="cameraview" width="720" height="480"></video>
+      </div>
+
+      <div class="buttons">
+        <button id="capture"></button>
+      </div>
+    </div>
+  </body>
+  
+  <!-- ----------------------------------------------------------------- -->
+  
+  <script>
+    let cameraButton = document.querySelector('.camera')
+    let webcamPopup = document.querySelector('#webcam')
+    let backButtons = document.querySelectorAll('#webcam #back')
+    let cameraView = document.querySelector('#cameraview')
+    let shutterButton = document.querySelector('#capture')
+    let canvas = document.createElement('canvas') // (변수는 남겨두지만 사용하지 않음)
+    let stream
+
+    // 2. 팝업 열기 + 카메라 시작
+    cameraButton.addEventListener('click', async () => {
+      webcamPopup.style.display = 'block'
+      try {
+        // --- 👇 [수정 1] 후면 카메라를 사용하도록 'facingMode: environment' 추가 ---
+        stream = await navigator.mediaDevices.getUserMedia({ 
+          video: { 
+            facingMode: 'environment' // 'user'는 전면, 'environment'는 후면
+          } 
+        })
+        // ------------------------------------------------------------------
+
+        cameraView.srcObject = stream
+        await cameraView.play()
+      } catch (err) {
+        alert('카메라를 사용할 수 없습니다. 후면 카메라가 있는지 확인해주세요.')
+        console.error(err)
+      }
+    })
+
+    // 3. 팝업 닫기 버튼 (웹캠 팝업용)
+    backButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        webcamPopup.style.display = 'none'
+        stopCamera()
+      })
+    })
+
+    // 4. 카메라 정지 함수
+    function stopCamera() {
+      if (stream) {
+        let tracks = stream.getTracks()
+        tracks.forEach((t) => t.stop())
+        stream = null
+      }
+      cameraView.srcObject = null
+    }
+
+    // 5. 📸 촬영 버튼 클릭 시
+    shutterButton.addEventListener('click', () => {
+      if (!stream) return // 스트림이 없으면 중단
+
+      // --- 👇 [수정 2] 캔버스에 그리는 대신 링크로 이동 ---
+      
+      // 1. 팝업 닫고 카메라 정지
+      webcamPopup.style.display = 'none'
+      stopCamera() 
+
+      // 2. 원하는 링크로 이동 (SKIP 버튼과 동일한 'uiy_manual.html'로 설정)
+      window.location.href = 'uiy_manual.html';
+      // -------------------------------------------------
+    })
+  </script>
 </html>
