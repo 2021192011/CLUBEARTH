@@ -399,127 +399,90 @@
     // -------카메라
 
     function camInit(stream) {
-      var cameraView = document.getElementById('cameraview')
-      cameraView.srcObject = stream
-      cameraView.play()
-    }
+     // -------카메라
 
-    function camInitFailed(error) {
-      console.log('get camera permission failed : ', error)
-    }
+    const cameraContainer = document.querySelector('.camera-container')
+    const cameraView = document.createElement('video')
+    cameraView.setAttribute('autoplay', true)
+    cameraView.setAttribute('playsinline', true)
+    cameraContainer.appendChild(cameraView)
 
-    // Main init
-
-    function mainInit() {
-      // Check navigator media device available
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        // Navigator mediaDevices not supported
-        alert('Media Device not supported')
-        return
-      }
-
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then(camInit)
-        .catch(camInitFailed)
-    }
-
-    const cameraButton = document.querySelector('.camera') // 카메라 리스트 항목
+    const captureButton = document.querySelector('#capture')
     const webcamPopup = document.querySelector('#webcam')
-    const backButtons = document.querySelectorAll('#webcam #back') // 닫기 버튼
+    let webcamStream = null
 
-    cameraButton.addEventListener('click', () => {
-      webcamPopup.style.display = 'block' // 팝업 표시
-      mainInit() // 카메라 시작
-    })
-
-    // 팝업 닫기 버튼
-    backButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        webcamPopup.style.display = 'none' // 팝업 닫기
-
-        // 카메라 종료 (리소스 정리)
-        const cameraView = document.getElementById('cameraview')
-        if (cameraView && cameraView.srcObject) {
-          const tracks = cameraView.srcObject.getTracks()
-          tracks.forEach((track) => track.stop())
-          cameraView.srcObject = null
-        }
-      })
-    })
-    const cameraView = document.querySelector('#cameraview')
-    const shutterButton = document.querySelector('#shutter')
-    const canvas = document.createElement('canvas')
-
-    let stream // 카메라 스트림 저장
-
-    // 팝업 열기 + 카메라 시작
-    cameraButton.addEventListener('click', async () => {
-      webcamPopup.style.display = 'block'
-
+    // ✅ 카메라 시작
+    async function startWebcam() {
       try {
-        stream = await navigator.mediaDevices.getUserMedia({ video: true })
-        cameraView.srcObject = stream
-        await cameraView.play()
+        webcamStream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        })
+        cameraView.srcObject = webcamStream
       } catch (err) {
-        alert('카메라를 사용할 수 없습니다.')
+        alert('카메라 접근이 거부되었거나 오류가 발생했습니다.')
         console.error(err)
       }
-    })
+    }
 
-    // 팝업 닫기 버튼
-    backButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        webcamPopup.style.display = 'none'
-        stopCamera()
-      })
-    })
-
-    // 카메라 정지 함수
-    function stopCamera() {
-      if (stream) {
-        const tracks = stream.getTracks()
-        tracks.forEach((t) => t.stop())
-        stream = null
+    // ✅ 카메라 종료
+    function stopWebcam() {
+      if (webcamStream) {
+        webcamStream.getTracks().forEach((track) => track.stop())
+        webcamStream = null
       }
       cameraView.srcObject = null
     }
 
-    // 📸 촬영 버튼 클릭 시
-    shutterButton.addEventListener('click', () => {
-      if (!stream) return
+    // ✅ 촬영 버튼 클릭 시
+    captureButton.addEventListener('click', () => {
+      if (!webcamStream) return
 
-      const video = cameraView
-      const width = video.videoWidth
-      const height = video.videoHeight
-
-      canvas.width = width
-      canvas.height = height
+      // 1️⃣ 비디오 프레임 캡처
+      const canvas = document.createElement('canvas')
+      canvas.width = cameraView.videoWidth
+      canvas.height = cameraView.videoHeight
       const ctx = canvas.getContext('2d')
-      ctx.drawImage(video, 0, 0, width, height)
-
+      ctx.drawImage(cameraView, 0, 0, canvas.width, canvas.height)
       const imageDataUrl = canvas.toDataURL('image/png')
 
-      // 팝업 닫고 카메라 종료
-      webcamPopup.style.display = 'none'
-      stopCamera()
-
-      // 📌 Cropper 화면에 이미지 적용
-      const imageEditor = document.querySelector('#image-editor')
-      const image = document.querySelector('#image')
-      image.src = imageDataUrl
-
-      if (window.cropper) window.cropper.destroy()
-      window.cropper = new Cropper(image, {
-        aspectRatio: 1,
-        viewMode: 1,
-        autoCropArea: 0.8,
+      // 2️⃣ 3D 모델 텍스처에 적용
+      const texture = new THREE.TextureLoader().load(imageDataUrl, function () {
+        const part = model.object3D.getObjectByName('uiy')
+        if (part) {
+          texture.wrapS = THREE.RepeatWrapping
+          texture.wrapT = THREE.RepeatWrapping
+          texture.flipY = false
+          part.material.map = texture
+          part.material.map.needsUpdate = true
+        }
       })
 
-      imageEditor.style.display = 'block'
+      // 3️⃣ 카메라 창 부드럽게 사라지기
+      webcamPopup.classList.add('hidden')
+      setTimeout(() => {
+        webcamPopup.style.display = 'none'
+        stopWebcam()
+      }, 600)
+    })
+
+    // ✅ “패턴 직접 적용” 카메라 버튼 클릭 시 팝업 표시
+    document.querySelector('.camera').addEventListener('click', () => {
+      webcamPopup.style.display = 'block'
+      webcamPopup.classList.remove('hidden')
+      startWebcam()
+    })
+
+    // ✅ “X” 버튼으로 닫기
+    document.querySelector('#webcam #back').addEventListener('click', () => {
+      webcamPopup.classList.add('hidden')
+      setTimeout(() => {
+        webcamPopup.style.display = 'none'
+        stopWebcam()
+      }, 600)
     })
   </script>
 </html>
+
 
 
 
