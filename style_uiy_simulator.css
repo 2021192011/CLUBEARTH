@@ -73,6 +73,10 @@ button {
 a {
   text-decoration-line: none;
 }
+
+a:visited {
+  color: var(--grey-900);
+}
 .back,
 .skip {
   display: flex;
@@ -385,6 +389,7 @@ img {
   transform: translate(-50%, 0);
   pointer-events: auto;
 }
+
 #webcam p {
   font-size: 18px;
   font-weight: 500;
