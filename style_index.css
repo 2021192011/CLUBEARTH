@@ -1,12 +1,5 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
 
-* {
-  font-family: 'Pretendard Variable', Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
-    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-}
-
 .ipad-pro-home {
   background-image: url(img/bg02.jpg);
   background-repeat: repeat;
@@ -491,7 +484,7 @@
 .ipad-pro-home .button-next:active {
   transform: scale(0.9);
 }
-
+.item,
 .ipad-pro-home .item-2,
 .ipad-pro-home .item-3 {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -501,7 +494,7 @@
 .ipad-pro-home .item-3:hover {
   transform: translateY(-4px);
 }
-
+.item:active,
 .ipad-pro-home .item-2:active,
 .ipad-pro-home .item-3:active {
   transform: scale(0.95);

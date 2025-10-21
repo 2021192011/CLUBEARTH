@@ -189,10 +189,6 @@
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
-      <a-assets>
-        <a-asset-item id="cardcase" src="cardcase.glb"></a-asset-item>
-      </a-assets>
-
       <a-entity
         camera
         position="0 1.6 -2"
@@ -201,15 +197,14 @@
 
       <a-gltf-model
         id="model"
-        src="#cardcase"
-        position="0 1 -10"
+        src=""
+        position="0 0.8 -10"
         scale="0.7 0.7 0.7"
       ></a-gltf-model>
     </a-scene>
   </body>
 
   <!-- ----------------------------------------------------------------- -->
-
   <script>
     let model = document.querySelector('#model')
     let imageUpload = document.querySelector('#image_upload')
@@ -235,9 +230,9 @@
     // 색상 적용
     document.querySelectorAll('.con-customize li').forEach((li) => {
       li.addEventListener('click', () => {
-        const bgColor = window.getComputedStyle(li).backgroundColor
+        let bgColor = window.getComputedStyle(li).backgroundColor
         if (window.getComputedStyle(li).backgroundImage !== 'none') return
-        const part = model.object3D.getObjectByName('uiy')
+        let part = model.object3D.getObjectByName('uiy')
         if (part) {
           part.material.map = null
           part.material.color.set(bgColor)
@@ -247,8 +242,8 @@
 
     // 텍스처 적용
     function applyTexture(imgPath) {
-      const texture = new THREE.TextureLoader().load(imgPath, function () {
-        const part = model.object3D.getObjectByName('uiy')
+      let texture = new THREE.TextureLoader().load(imgPath, function () {
+        let part = model.object3D.getObjectByName('uiy')
         if (part) {
           texture.wrapS = THREE.RepeatWrapping
           texture.wrapT = THREE.RepeatWrapping
@@ -268,8 +263,9 @@
     })
     document.querySelector('.texture-cotton').addEventListener('click', () => {
       applyTexture('img/texture-03.jpg')
-    }) // 이미지 에디터 표시 (파일 업로드)
+    })
 
+    // 이미지 에디터 표시 (파일 업로드)
     imageUpload.addEventListener('change', function (e) {
       let file = e.target.files[0]
       let reader = new FileReader()
@@ -287,8 +283,6 @@
       }
       reader.readAsDataURL(file)
     })
-
-    // ❗️❗️ [구조 수정] 버튼 리스너들은 최상위 레벨에 있어야 합니다. ❗️❗️
 
     // 회전 버튼
     rotateButton.addEventListener('click', function () {
@@ -317,7 +311,6 @@
               }
             }
           )
-          _B__
         })
       }
       imageEditor.classList.remove('is-visible')
@@ -331,11 +324,53 @@
 
     // A-Frame 모델 드래그 회전
     document.addEventListener('DOMContentLoaded', () => {
-      const sceneEl = document.querySelector('a-scene')
-      const modelEl = document.querySelector('#model')
+      // --- 👇 [수정] 모델별 스케일 및 포지션 관리 로직 ---
+      try {
+        const urlParams = new URLSearchParams(window.location.search)
+        const modelFile = urlParams.get('model')
+
+        // 1. 모델별 스케일 값을 미리 정의
+        const modelScales = {
+          'cardcase.glb': '0.7 0.7 0.7',
+          'stringbag.glb': '0.45 0.45 0.45',
+          'minibag.glb': '0.3 0.3 0.3',
+        }
+
+        // 2. 기본값 설정
+        let srcToLoad = 'cardcase.glb'
+        let scaleToLoad = modelScales[srcToLoad]
+
+        // 3. [추가] 포지션 기본값 설정 (HTML의 기본값과 동일)
+        let positionToLoad = '0 1 -10'
+
+        // 4. URL에 맞는 모델과 스케일 값 찾기
+        if (modelFile && modelScales[modelFile]) {
+          srcToLoad = modelFile
+          scaleToLoad = modelScales[modelFile]
+
+          // 5. [추가] 예외(minibag)인지 확인
+          if (modelFile === 'minibag.glb') {
+            positionToLoad = '0 -.2 -10'
+          }
+        }
+
+        // 6. 모델(src), 스케일(scale), 포지션(position)을 동시 적용
+        model.setAttribute('src', srcToLoad)
+        model.setAttribute('scale', scaleToLoad)
+        model.setAttribute('position', positionToLoad) // 👈 포지션 적용
+      } catch (e) {
+        console.error('모델 로드 중 오류:', e)
+        // 오류 발생 시 기본 모델 로드
+        model.setAttribute('src', 'cardcase.glb')
+        model.setAttribute('scale', '0.7 0.7 0.7')
+        model.setAttribute('position', '0 1 -10')
+      }
+      // --- [수정] 끝 ---
+
+      let sceneEl = document.querySelector('a-scene')
       sceneEl.style.zIndex = '1'
       sceneEl.addEventListener('loaded', () => {
-        const canvas = sceneEl.canvas
+        let canvas = sceneEl.canvas
         if (!canvas) {
           console.warn('A-Frame canvas not found.')
           return
@@ -345,7 +380,7 @@
         let lastX = 0
         let lastY = 0
         let rotation = { x: 0, y: 0 }
-        const SENSITIVITY = 1
+        let SENSITIVITY = 1
         function startDrag(clientX, clientY) {
           isDragging = true
           lastX = clientX
@@ -353,13 +388,14 @@
         }
         function moveDrag(clientX, clientY) {
           if (!isDragging) return
-          const dx = clientX - lastX
-          const dy = clientY - lastY
+          let dx = clientX - lastX
+          let dy = clientY - lastY
           rotation.y += dx * SENSITIVITY
           rotation.x += dy * SENSITIVITY
           rotation.x = Math.max(Math.min(rotation.x, 80), -80)
-          if (modelEl) {
-            modelEl.setAttribute('rotation', `${-rotation.x} ${rotation.y} 0`)
+
+          if (model) {
+            model.setAttribute('rotation', `${-rotation.x} ${rotation.y} 0`)
           }
           lastX = clientX
           lastY = clientY
@@ -389,20 +425,20 @@
       })
     })
 
-    // -------카메라 (수정된 버전)-------
+    // -------카메라 -------
 
     // 1. 필요한 변수들을 모두 선언합니다.
-    const cameraButton = document.querySelector('.camera')
-    const webcamPopup = document.querySelector('#webcam')
-    const backButtons = document.querySelectorAll('#webcam #back')
-    const cameraView = document.querySelector('#cameraview')
-    const shutterButton = document.querySelector('#capture')
-    const canvas = document.createElement('canvas')
+    let cameraButton = document.querySelector('.camera')
+    let webcamPopup = document.querySelector('#webcam')
+    let backButtons = document.querySelectorAll('#webcam #back')
+    let cameraView = document.querySelector('#cameraview')
+    let shutterButton = document.querySelector('#capture')
+    let canvas = document.createElement('canvas')
     let stream
 
     // 2. 팝업 열기 + 카메라 시작
     cameraButton.addEventListener('click', async () => {
-      webcamPopup.style.display = 'block'
+      webcamPopup.classList.add('is-visible')
       try {
         stream = await navigator.mediaDevices.getUserMedia({ video: true })
         cameraView.srcObject = stream
@@ -416,7 +452,7 @@
     // 3. 팝업 닫기 버튼 (웹캠 팝업용)
     backButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
-        webcamPopup.style.display = 'none'
+        webcamPopup.classList.remove('is-visible')
         stopCamera()
       })
     })
@@ -424,7 +460,7 @@
     // 4. 카메라 정지 함수
     function stopCamera() {
       if (stream) {
-        const tracks = stream.getTracks()
+        let tracks = stream.getTracks()
         tracks.forEach((t) => t.stop())
         stream = null
       }
@@ -434,21 +470,21 @@
     // 5. 📸 촬영 버튼 클릭 시
     shutterButton.addEventListener('click', () => {
       if (!stream) return
-      const video = cameraView
-      const width = video.videoWidth
-      const height = video.videoHeight
+      let video = cameraView
+      let width = video.videoWidth
+      let height = video.videoHeight
       canvas.width = width
       canvas.height = height
-      const ctx = canvas.getContext('2d')
+      let ctx = canvas.getContext('2d')
       ctx.translate(width, 0)
       ctx.scale(-1, 1)
       ctx.drawImage(video, 0, 0, width, height)
       ctx.setTransform(1, 0, 0, 1, 0, 0)
-      const imageDataUrl = canvas.toDataURL('image/png')
-      webcamPopup.style.display = 'none'
-      stopCamera() // const imageEditor = document.querySelector('#image-editor') // (이미 맨 위에 선언됨) // const image = document.querySelector('#image') // (이미 맨 위에 선언됨)
+      let imageDataUrl = canvas.toDataURL('image/png')
+      webcamPopup.classList.remove('is-visible')
+      stopCamera()
 
-      // 📌 Cropper 화면에 이미지 적용
+      // Cropper 화면에 이미지 적용
       image.src = imageDataUrl
       if (cropper) cropper.destroy()
       cropper = new Cropper(image, {

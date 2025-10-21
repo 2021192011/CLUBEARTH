@@ -1,10 +1,12 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
+
 * {
   font-family: 'Pretendard Variable', Pretendard, -apple-system,
     BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
     'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 }
+
 body {
   overflow: hidden;
   background-image: url('img/bg01.jpg');
@@ -137,6 +139,7 @@ body {
   border: none;
   background: none;
 }
+
 .ipad-pro-uiy .exclude {
   position: absolute;
   width: 62.5%;
@@ -160,9 +163,11 @@ h1 {
   line-height: 36px;
   text-align: center;
 }
+
 .steps img {
   width: 116px;
 }
+
 .steps {
   position: absolute;
   top: 103px;
@@ -170,6 +175,7 @@ h1 {
   width: 118px;
   height: 22px;
 }
+
 h1 span {
   font-family: 'Pretendard Variable';
   font-weight: 600;
@@ -180,6 +186,7 @@ button {
   border: none;
   background: none;
 }
+
 .bottom_buttons {
   height: 48px;
   width: 90%;
@@ -189,9 +196,10 @@ button {
   align-items: center;
   justify-content: space-between;
   position: absolute;
-  bottom: 40px;
+  bottom: 48px;
   z-index: 9;
 }
+
 .button-done {
   width: 230px;
   height: 48px;
@@ -201,6 +209,7 @@ button {
   box-shadow: var(--shadow);
   position: relative;
 }
+
 .button-done p {
   top: calc(50% - 15px);
   left: calc(50% - 68px);
@@ -228,13 +237,13 @@ button {
   transition: 0.1s;
 }
 
-.back p,
-.skip p {
+.back p {
   font-family: 'Dela Gothic One', Helvetica;
   font-size: 16px;
   opacity: 0.3;
   color: var(--gray-900);
 }
+
 a {
   text-decoration-line: none;
 }
@@ -242,15 +251,18 @@ a {
 a:visited {
   color: var(--grey-900);
 }
+
 .back,
 .skip {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .back img {
   rotate: 180deg;
 }
+
 .back img,
 .skip img {
   width: 32px;
@@ -276,4 +288,321 @@ a:visited {
   left: calc(50% - 59px);
   width: 118px;
   height: 22px;
+}
+
+/* ------------------------item---------------------- */
+
+.items {
+  width: 100%;
+  height: 440px;
+
+  position: absolute;
+  top: 238px;
+  right: 0;
+  white-space: nowrap;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+
+.items::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  width: 264px;
+  height: 360px;
+  overflow: hidden;
+  border-radius: 40px;
+  box-shadow: var(--shadow);
+  display: inline-block;
+  margin-top: 20px;
+  margin-right: 24px;
+}
+
+.item:first-child {
+  margin-left: 225px;
+}
+
+.item_before {
+  height: 100%;
+}
+
+.item_before.is-active {
+  display: none;
+}
+
+/* ---- */
+
+/* --- 아이템 클릭 상호작용 --- */
+
+/* .item_after(상세)가 *있는* 아이템만 클릭 가능하도록 커서 변경 */
+.item:has(.item_after) {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+/* 클릭 효과 (선택 사항) */
+.item:has(.item_after):active {
+  transform: scale(0.98);
+}
+
+/* .item_after는 기본적으로 숨김 */
+.item .item_after {
+  display: none;
+}
+
+/* .is-active가 붙은 아이템의 .item_before는 숨김 */
+.item.is-active .item_before {
+  display: none;
+}
+
+/* .is-active가 붙은 아이템의 .item_after는 표시 */
+.item.is-active .item_after {
+  display: block;
+}
+
+.item.is-active {
+  position: fixed;
+  top: 80px;
+  left: 130px;
+
+  width: 934px;
+  height: 566px;
+  background-color: #fff;
+  z-index: 10;
+}
+.item:first-child.is-active {
+  margin-left: 0;
+}
+
+.item .item_after img {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.shots {
+  width: 332px;
+  height: 566px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+iframe {
+  border-radius: 30px;
+}
+
+/* --bottom-- */
+
+button {
+  border: none;
+  background: none;
+}
+
+.bottom_buttons {
+  height: 48px;
+  width: 90%;
+  padding: 0 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 40px;
+  z-index: 9;
+}
+
+.button-done {
+  width: 216px;
+  height: 56px;
+  margin-right: 72px;
+  background-color: var(--green-200);
+  border-radius: 100px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.button-done p {
+  top: calc(50% - 15px);
+  left: calc(40% - 16px);
+
+  font-weight: 600;
+  color: var(--grey-100);
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  line-height: 30px;
+  position: absolute;
+}
+
+.button-done img {
+  position: absolute;
+  top: calc(50% - 15px);
+  left: calc(80%);
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.button-done:active {
+  opacity: 0.5;
+  scale: calc(0.95);
+  transition: 0.1s;
+}
+
+.back p {
+  font-family: 'Dela Gothic One', Helvetica;
+  font-size: 16px;
+  opacity: 0.3;
+  color: var(--gray-900);
+}
+
+a {
+  text-decoration-line: none;
+}
+
+a:visited {
+  color: var(--grey-900);
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back img {
+  rotate: 180deg;
+}
+
+.back img {
+  width: 32px;
+  height: 32px;
+}
+
+.text-wrapper-3 {
+  top: 148px;
+  left: calc(50% - 122px);
+  font-family: 'Pretendard Variable-SemiBold', Helvetica;
+  font-weight: 600;
+  color: var(--green-200);
+  font-size: 24px;
+  letter-spacing: 0.48px;
+  line-height: 36px;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.steps {
+  position: absolute;
+  top: 103px;
+  left: calc(50% - 59px);
+  width: 118px;
+  height: 22px;
+}
+
+.item_icon img {
+  width: 56px;
+  height: 56px;
+  margin-right: 32px;
+  box-shadow: var(--shadow);
+  border-radius: 50%;
+}
+
+.line {
+  width: 540px;
+  height: 6px;
+  background-color: #fff;
+  z-index: -1;
+
+  position: absolute;
+  top: 22px;
+  right: 340px;
+  box-shadow: var(--shadow);
+}
+
+/* ---------------------------------- */
+
+/* --- 모달 이전/다음 버튼 스타일 --- */
+.modal-nav-btn {
+  position: fixed; /* 화면 기준 고정 */
+  top: 45%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 101; /* 활성화된 .item(100)보다 높게 */
+
+  /* 👇 기본적으로 숨김 */
+  display: none;
+  transition: all 0.2s ease;
+}
+
+.modal-nav-btn:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+.modal-nav-btn img {
+  width: 32px;
+  height: 32px;
+}
+
+/* '이전' 버튼 */
+.modal-nav-btn.prev {
+  left: 30px;
+}
+.modal-nav-btn.prev img {
+  transform: rotate(180deg); /* 아이콘 방향 반전 */
+}
+
+/* '다음' 버튼 */
+.modal-nav-btn.next {
+  right: 30px;
+}
+
+/* --- 👇 JS가 body에 클래스를 추가하면 버튼을 보여줌 --- */
+
+/* 모달이 열리면(body.modal-is-active) 두 버튼을 모두 표시 */
+body.modal-is-active .modal-nav-btn {
+  display: block;
+}
+
+/* 단, 첫번째 아이템(body.showing-first-item)일 땐 '이전' 버튼만 숨김 */
+body.modal-is-active.showing-first-item .modal-nav-btn.prev {
+  display: none;
+}
+
+/* 모달이 열려있을 때 */
+body.modal-is-active .items {
+  /* (선택) 배경 스크롤바를 즉시 숨깁니다. */
+  overflow-x: hidden;
+}
+
+/* 모달이 열려있을 때, .is-active가 붙지 않은 모든 .item을 숨깁니다. */
+body.modal-is-active .item:not(.is-active) {
+  display: none;
+}
+
+.bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  z-index: -1;
+  mix-blend-mode: darken;
+}
+
+.bg_video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+body.modal-is-active .bg {
+  display: none;
 }

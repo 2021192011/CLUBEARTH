@@ -19,6 +19,7 @@
 
 .mypage_img {
   mix-blend-mode: hard-light;
+  z-index: 0;
 }
 
 .ipad-pro-home .bottom {
@@ -91,6 +92,8 @@
   border-left-style: none;
   border-color: var(--green-300);
   mix-blend-mode: hard-light;
+
+  z-index: 5;
 }
 
 .ipad-pro-home .logo-2 {

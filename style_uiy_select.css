@@ -10,10 +10,8 @@
 }
 body {
   overflow: hidden;
-}
-button:focus-visible {
-  outline: 2px solid #4a90e2 !important;
-  outline: -webkit-focus-ring-color auto 5px !important;
+  background-image: url('img/bg01.jpg');
+  background-repeat: repeat;
 }
 a {
   text-decoration: none;
@@ -24,16 +22,6 @@ a {
   min-width: 1194px;
   min-height: 832px;
   position: relative;
-  background-image: url(img/bg01.jpg);
-  background-repeat: repeat;
-}
-
-.ipad-pro-uiy .background {
-  position: absolute;
-  top: -42px;
-  left: 0;
-  width: 1600px;
-  height: 1067px;
 }
 
 .ipad-pro-uiy .element-canvas-fabric {
@@ -112,7 +100,7 @@ a {
   top: calc(50% - 15px);
   left: calc(50% - 68px);
 
-  font-weight: 700;
+  font-weight: 600;
   color: var(--grey-100);
   font-size: 20px;
   text-align: center;
@@ -132,7 +120,7 @@ a {
 
 .ipad-pro-uiy .item-1 {
   position: absolute;
-  width: 25.13%;
+  width: 25%;
   top: 232px;
   left: 9.63%;
   height: 420px;
@@ -230,7 +218,7 @@ a {
 
 .ipad-pro-uiy .item-2 {
   position: absolute;
-  width: 25.13%;
+  width: 25%;
   top: 232px;
   left: 37.44%;
   height: 420px;
@@ -256,7 +244,7 @@ a {
 
 .ipad-pro-uiy .item-3 {
   position: absolute;
-  width: 25.13%;
+  width: 25%;
   top: 232px;
   left: 65.24%;
   height: 420px;
@@ -343,7 +331,6 @@ a {
   top: -42px;
   left: 0;
   height: 98px;
-  mix-blend-mode: hard-light;
 }
 
 .ipad-pro-uiy .header {
@@ -374,11 +361,13 @@ a {
 .ipad-pro-uiy .p {
   top: calc(50% - 8px);
   left: calc(50% - 48px);
+
   font-weight: 600;
   color: var(--green-300);
   font-size: 14px;
   letter-spacing: 0.28px;
   line-height: 14px;
+
   position: absolute;
   white-space: nowrap;
 }

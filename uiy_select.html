@@ -9,14 +9,16 @@
   </head>
   <body>
     <main class="ipad-pro-uiy">
-      <a href="uiy_simulator.html"> <button class="button-done">
-        <span class="text-wrapper">다음 스텝으로</span>
-        <img
-          class="frame"
-          src="https://c.animaapp.com/acujdZT9/img/frame-357.svg"
-          alt=""
-        />
-      </button></a>
+      <a href="uiy_simulator.html" id="next-step-link">
+  <button class="button-done">
+    <span class="text-wrapper">다음 스텝으로</span>
+    <img
+      class="frame"
+      src="https://c.animaapp.com/acujdZT9/img/frame-357.svg"
+      alt=""
+    />
+  </button>
+</a>
        
       
       
@@ -123,20 +125,52 @@
   </body>
 
   <script>
-      const flipItems = document.querySelectorAll('.item-1, .item-2, .item-3');
+    // 1. 필요한 요소들을 선택합니다.
+    const flipItems = document.querySelectorAll('.item-1, .item-2, .item-3');
+    const nextStepLink = document.getElementById('next-step-link');
 
-      flipItems.forEach(item => {
-        item.addEventListener('click', function() {
-          
-          flipItems.forEach(i => {
-            if (i.classList.contains('is-flipped')) {
-                i.classList.remove('is-flipped');
-            }
-          });
+    // 2. 아이템 값과 실제 모델 파일명을 매핑합니다.
+    const modelMap = {
+      'card-wallet': 'cardcase.glb',
+      'string-bag': 'stringbag.glb',
+      'mini-bag': 'minibag.glb'
+    };
 
-          this.classList.toggle('is-flipped');
-
+    // 3. 아이템 클릭 이벤트를 설정합니다.
+    flipItems.forEach(item => {
+      item.addEventListener('click', function() {
+        
+        // --- [수정] 파트 1: 플립 애니메이션 (원래 로직으로 복구) ---
+        
+        // 1. 우선 모든 아이템에서 'is-flipped'를 제거합니다.
+        flipItems.forEach(i => {
+            i.classList.remove('is-flipped');
         });
+
+        // 2. 방금 클릭한 아이템에만 'is-flipped'를 추가합니다.
+        // (toggle이 아닌 add를 사용하여, 클릭 시 절대 꺼지지 않도록 보장)
+        this.classList.add('is-flipped');
+
+        // --- 파트 2: 링크 업데이트 (새 로직) ---
+        const radio = this.querySelector('input[type="radio"]');
+        if (radio) {
+          // 라디오 버튼을 강제로 '선택' 상태로 만듭니다.
+          radio.checked = true; 
+          
+          // 맵에서 해당 모델 파일명을 찾습니다.
+          const modelFile = modelMap[radio.value];
+          
+          if (modelFile) {
+            // '다음 스텝으로' 버튼의 링크(href)를 업데이트합니다.
+            nextStepLink.href = `uiy_simulator.html?model=${modelFile}`;
+          } else {
+            // 일치하는 모델이 없으면 기본 페이지로 설정
+            nextStepLink.href = 'uiy_simulator.html';
+          }
+        }
       });
-    </script>
+    });
+  </script>
+</html>
+    
 </html>
