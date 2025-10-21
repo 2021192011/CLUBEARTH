@@ -250,7 +250,6 @@ a:visited {
   left: 50%;
   transform: translate(-50%, 0);
   height: 100%;
-  width: 100%;
   z-index: -1;
   mix-blend-mode: darken;
   overflow: visible;
@@ -258,7 +257,6 @@ a:visited {
 
 .bg_video {
   height: 100%;
-  width: 100%;
   object-fit: cover;
   overflow: visible;
 }
