@@ -145,7 +145,7 @@ body {
   left: 18.75%;
 }
 
-/* ---top--- */
+/* ------------------------top--------------------- */
 
 h1 {
   position: absolute;
@@ -153,9 +153,9 @@ h1 {
   left: 50%;
   transform: translateX(-50%);
 
-  font-weight: 600;
+  font-family: 'Dela Gothic One', Helvetica;
   color: var(--green-200);
-  font-size: 22px;
+  font-size: 32px;
   letter-spacing: 0.48px;
   line-height: 36px;
   text-align: center;
@@ -171,18 +171,10 @@ h1 {
   height: 22px;
 }
 h1 span {
-  text-decoration: underline;
-  text-underline-position: under;
+  font-family: 'Pretendard Variable';
+  font-weight: 600;
+  font-size: 20px;
 }
-
-.guide_img {
-  width: 855px;
-  position: absolute;
-  top: 284px;
-  left: calc(50% - 427px);
-}
-
-/* --bottom-- */
 
 button {
   border: none;
@@ -200,8 +192,7 @@ button {
   bottom: 40px;
   z-index: 9;
 }
-
-.camera {
+.button-done {
   width: 230px;
   height: 48px;
   background-color: var(--green-200);
@@ -210,7 +201,7 @@ button {
   box-shadow: var(--shadow);
   position: relative;
 }
-.camera p {
+.button-done p {
   top: calc(50% - 15px);
   left: calc(50% - 68px);
 
@@ -223,7 +214,7 @@ button {
   position: absolute;
 }
 
-.camera img {
+.button-done img {
   position: absolute;
   top: 10px;
   left: 190px;
@@ -231,7 +222,7 @@ button {
   height: 28px;
 }
 
-.camera:active {
+.button-done:active {
   opacity: 0.5;
   scale: calc(0.95);
   transition: 0.1s;
@@ -247,6 +238,7 @@ button {
 a {
   text-decoration-line: none;
 }
+
 a:visited {
   color: var(--grey-900);
 }
@@ -265,100 +257,23 @@ a:visited {
   height: 32px;
 }
 
-/* -- camera -- */
-
-#webcam {
-  width: 800px;
-  height: 700px;
-  padding: 24px 48px;
-  background-color: #fff;
-
-  box-sizing: border-box;
-  border-radius: 20px;
-  box-shadow: 0px 0px 1000px 1000px rgba(0, 0, 0, 0.3);
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  opacity: 0;
-  transform: translate(-50%, 100%) translateZ(0);
-  transition: transform 0.4s ease-out, opacity 0.4s ease-out;
-
-  z-index: 10;
-}
-
-#webcam.is-visible {
-  opacity: 1;
-  transform: translate(-50%, -50%) translateZ(0);
-}
-
-#webcam p {
-  font-size: 18px;
+.text-wrapper-3 {
+  top: 148px;
+  left: calc(50% - 122px);
+  font-family: 'Pretendard Variable-SemiBold', Helvetica;
   font-weight: 600;
-  color: var(--grey-700);
-  width: 52%;
-}
-
-.camera-container {
-  margin: 24px auto;
-  width: 700px;
-  height: 525px;
-  overflow: hidden;
-  background-color: #000;
-  position: relative;
-}
-.guide_line {
+  color: var(--green-200);
+  font-size: 24px;
+  letter-spacing: 0.48px;
+  line-height: 36px;
   position: absolute;
-  top: 80px;
-  left: 48px;
-  width: 700px;
-  height: 525px;
-  z-index: 20;
-
-  transform: translateZ(0);
+  white-space: nowrap;
 }
-#cameraview {
+
+.steps {
   position: absolute;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 10;
-}
-.webcam-title {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  width: 100%;
-  height: 32px;
-}
-
-#capture {
-  display: flex;
-  margin: 0 auto;
-  width: 48px;
-  height: 48px;
-  background-color: var(--green-200);
-  border-radius: 50%;
-}
-#capture:active {
-  scale: 0.95;
-}
-
-#back {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  background: none;
-  border: none;
-  color: var(--grey-700);
-  font-size: 18px;
-  font-weight: 500;
-}
-
-#back img {
-  width: 24px;
-  height: 24px;
+  top: 103px;
+  left: calc(50% - 59px);
+  width: 118px;
+  height: 22px;
 }
