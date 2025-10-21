@@ -30,6 +30,7 @@ button {
 .button-done {
   width: 230px;
   height: 48px;
+  margin-left: 24px;
   background-color: var(--green-200);
   border-radius: 100px;
   overflow: hidden;
@@ -72,6 +73,7 @@ button {
 }
 a {
   text-decoration-line: none;
+  color: var(--gray-900);
 }
 
 a:visited {
