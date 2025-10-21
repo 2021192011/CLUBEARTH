@@ -1,0 +1,351 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
+* {
+  font-family: 'Pretendard Variable', Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
+body {
+  overflow: hidden;
+  background-image: url('img/bg01.jpg');
+  background-repeat: repeat;
+}
+
+/* ---top--- */
+
+.ipad-pro-uiy .top {
+  position: absolute;
+  width: 100%;
+  top: -42px;
+  left: 0;
+  height: 98px;
+}
+
+.ipad-pro-uiy .header {
+  position: absolute;
+  width: 100.13%;
+  height: 58.67%;
+  top: 42.09%;
+  left: 0;
+  background-color: transparent;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-width: 1.5px;
+  border-bottom-style: dashed;
+  border-left-style: none;
+  border-color: var(--green-300);
+  mix-blend-mode: hard-light;
+  z-index: 3;
+}
+
+.ipad-pro-uiy .logo {
+  position: absolute;
+  top: calc(50% - 9px);
+  left: 48px;
+  width: 121px;
+  height: 16px;
+  aspect-ratio: 7.55;
+}
+
+.ipad-pro-uiy p {
+  top: calc(50% - 8px);
+  left: calc(50% - 48px);
+
+  font-weight: 600;
+  color: var(--green-300);
+  font-size: 14px;
+  letter-spacing: 0.28px;
+  line-height: 14px;
+
+  position: absolute;
+  white-space: nowrap;
+}
+
+.ipad-pro-uiy .span {
+  letter-spacing: 0.04px;
+}
+
+.ipad-pro-uiy .text-wrapper-4 {
+  letter-spacing: 0.04px;
+  text-decoration: underline;
+}
+
+.ipad-pro-uiy .buttons {
+  position: absolute;
+  top: 0;
+  right: 36px;
+  width: 168px;
+  height: 56px;
+}
+
+.ipad-pro-uiy .button-mypage {
+  display: flex;
+  flex-direction: column;
+  width: 56px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  position: absolute;
+  top: 0;
+  left: 112px;
+  border: none;
+  background: none;
+}
+
+.ipad-pro-uiy .img-wrapper {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  aspect-ratio: 1;
+}
+
+.ipad-pro-uiy .union {
+  position: absolute;
+  width: 53.12%;
+  height: 60.94%;
+  top: 18.49%;
+  left: 22.66%;
+}
+
+.ipad-pro-uiy .button-community {
+  display: flex;
+  flex-direction: column;
+  width: 56px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  position: absolute;
+  top: 0;
+  left: 55px;
+  border: none;
+  background: none;
+}
+
+.ipad-pro-uiy .button-uiy {
+  display: flex;
+  flex-direction: column;
+  width: 56px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: none;
+  background: none;
+}
+.ipad-pro-uiy .exclude {
+  position: absolute;
+  width: 62.5%;
+  height: 62.5%;
+  top: 18.75%;
+  left: 18.75%;
+}
+
+/* ---top--- */
+
+h1 {
+  position: absolute;
+  top: 148px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-weight: 600;
+  color: var(--green-200);
+  font-size: 22px;
+  letter-spacing: 0.48px;
+  line-height: 36px;
+  text-align: center;
+}
+.steps img {
+  width: 116px;
+}
+.steps {
+  position: absolute;
+  top: 103px;
+  left: calc(50% - 58px);
+  width: 118px;
+  height: 22px;
+}
+h1 span {
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+.guide_img {
+  width: 855px;
+  position: absolute;
+  top: 284px;
+  left: calc(50% - 427px);
+}
+
+/* --bottom-- */
+
+button {
+  border: none;
+  background: none;
+}
+.bottom_buttons {
+  height: 48px;
+  width: 90%;
+  padding: 0 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 40px;
+  z-index: 9;
+}
+.camera {
+  width: 230px;
+  height: 48px;
+  background-color: var(--green-200);
+  border-radius: 100px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+.camera p {
+  top: calc(50% - 15px);
+  left: calc(50% - 68px);
+
+  font-weight: 600;
+  color: var(--grey-100);
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  line-height: 30px;
+  position: absolute;
+}
+
+.camera img {
+  position: absolute;
+  top: 10px;
+  left: 190px;
+  width: 28px;
+  height: 28px;
+}
+
+.camera:active {
+  opacity: 0.5;
+  scale: calc(0.95);
+  transition: 0.1s;
+}
+
+.back p,
+.skip p {
+  font-family: 'Dela Gothic One', Helvetica;
+  font-size: 16px;
+  opacity: 0.3;
+  color: var(--gray-900);
+}
+a {
+  text-decoration-line: none;
+}
+.back,
+.skip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.back img {
+  rotate: 180deg;
+}
+.back img,
+.skip img {
+  width: 32px;
+  height: 32px;
+}
+
+/* -- camera -- */
+
+/* ---camera--- */
+
+#webcam {
+  width: 800px;
+  height: 700px;
+  padding: 24px 48px;
+  background-color: #fff;
+
+  box-sizing: border-box;
+  border-radius: 40px;
+  box-shadow: 0px 0px 1000px 1000px rgba(0, 0, 0, 0.3);
+
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 10;
+}
+#webcam p {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--grey-700);
+  width: 52%;
+}
+
+.camera-container {
+  margin: 24px auto;
+  width: 700px;
+  height: 525px;
+  overflow: hidden;
+  background-color: #000;
+  position: relative;
+}
+.camera-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#cameraview {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 비율을 유지하면서 꽉 채우기 */
+}
+
+.webcam-title {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  height: 32px;
+}
+
+#capture {
+  display: flex;
+  margin: 0 auto;
+  width: 48px;
+  height: 48px;
+  background-color: var(--green-200);
+  border-radius: 50%;
+}
+#capture:active {
+  scale: 0.95;
+}
+
+#back {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--grey-700);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+#back img {
+  width: 24px;
+  height: 24px;
+}

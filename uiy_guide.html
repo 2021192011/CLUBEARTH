@@ -131,7 +131,7 @@
 
     // 2. 팝업 열기 + 카메라 시작
     cameraButton.addEventListener('click', async () => {
-      webcamPopup.style.display = 'block'
+      webcamPopup.classList.add('is-visible')
       try {
         // --- 👇 [수정 1] 후면 카메라를 사용하도록 'facingMode: environment' 추가 ---
         stream = await navigator.mediaDevices.getUserMedia({ 
@@ -152,7 +152,7 @@
     // 3. 팝업 닫기 버튼 (웹캠 팝업용)
     backButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
-        webcamPopup.style.display = 'none'
+        webcamPopup.classList.remove('is-visible')
         stopCamera()
       })
     })
@@ -174,10 +174,9 @@
       // --- 👇 [수정 2] 캔버스에 그리는 대신 링크로 이동 ---
       
       // 1. 팝업 닫고 카메라 정지
-      webcamPopup.style.display = 'none'
+      webcamPopup.classList.remove('is-visible')
       stopCamera() 
 
-      // 2. 원하는 링크로 이동 (SKIP 버튼과 동일한 'uiy_manual.html'로 설정)
       window.location.href = 'uiy_manual.html';
       // -------------------------------------------------
     })
