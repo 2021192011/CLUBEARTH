@@ -294,13 +294,14 @@ button {
 
 .bottom_buttons {
   height: 56px;
-  width: 90%;
+  width: 100%;
   padding: 0 48px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: absolute;
+  box-sizing: border-box;
   bottom: 40px;
   z-index: 9;
 }
@@ -344,7 +345,7 @@ button {
 }
 
 .bottom_buttons a {
-  color: var(--gray-900);
+  color: var(--gray-900) !important;
   text-decoration: none;
 }
 
@@ -393,7 +394,8 @@ a:visited {
 .item_icon {
   display: flex;
   align-items: center;
-  position: relative; /* .line의 position: absolute 기준점 */
+  flex-direction: row;
+  position: relative;
 }
 
 .item_icon img {

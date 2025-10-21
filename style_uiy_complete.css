@@ -171,7 +171,7 @@ button {
 .button-done {
   width: 190px;
   height: 64px;
-  padding: 0 24px 0 40px;
+  padding: 0 24px;
 
   background-color: transparent;
   border: 2px solid #ddd;
@@ -250,6 +250,7 @@ a:visited {
   left: 50%;
   transform: translate(-50%, 0);
   height: 100%;
+  width: 100%;
   z-index: -1;
   mix-blend-mode: darken;
 }
