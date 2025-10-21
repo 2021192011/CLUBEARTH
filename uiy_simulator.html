@@ -13,6 +13,13 @@
 
     <link rel="stylesheet" href="styleguide.css" />
     <link rel="stylesheet" href="style_uiy_simulator.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -79,14 +86,14 @@
     <div id="image-editor">
       <div class="editor-title">
         <p>패턴이 잘 보이도록 잘라주세요!</p>
-        <button id="back">X</button>
+        <button id="back"><img src="img/icon_close.png" /></button>
       </div>
       <div class="image-container">
         <img id="image" />
       </div>
 
       <div class="buttons">
-        <button id="rotate">회전</button>
+        <button id="rotate"><img src="img/icon_rotate.png" /></button>
         <button id="done">적용</button>
       </div>
     </div>
@@ -94,7 +101,7 @@
     <div id="webcam">
       <div class="webcam-title">
         <p>패턴이 잘 보이도록 촬영해 주세요</p>
-        <button id="back">X</button>
+        <button id="back"><img src="img/icon_close.png" /></button>
       </div>
       <div class="camera-container">
         <video id="cameraview" width="720" height="480"></video>
@@ -154,6 +161,28 @@
           ></li>
         </ul>
       </div>
+    </div>
+
+    <div class="bottom_buttons">
+      <a href="uiy_select.html">
+        <button class="back">
+          <img src="img/icon_more.png" />
+          <p>BACK</p>
+        </button></a
+      >
+      <a href="uiy_guide.html">
+        <button class="button-done">
+          <p>다음 스텝으로</p>
+          <img
+            src="https://c.animaapp.com/acujdZT9/img/frame-357.svg"
+            alt=""
+          /></button
+      ></a>
+      <a href="uiy_guide.html">
+        <button class="skip">
+          <p>SKIP</p>
+          <img src="img/icon_more.png" /></button
+      ></a>
     </div>
 
     <a-scene
