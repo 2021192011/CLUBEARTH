@@ -205,6 +205,7 @@ button {
 .camera {
   width: 230px;
   height: 48px;
+  margin-left: 24px;
   background-color: var(--green-200);
   border-radius: 100px;
   overflow: hidden;
@@ -237,7 +238,23 @@ button {
   scale: calc(0.95);
   transition: 0.1s;
 }
+.bottom_buttons a {
+  color: var(--gray-900);
+  text-decoration: none;
+}
 
+/* 2. <button> 태그가 부모(<a>)의 색상을 그대로 상속받도록 합니다. */
+.bottom_buttons .back,
+.bottom_buttons .skip {
+  color: inherit;
+}
+
+/* 3. <p> 태그가 원래 의도한 대로 회색과 투명도를 갖도록 다시 명시합니다. */
+.bottom_buttons .back p,
+.bottom_buttons .skip p {
+  color: var(--gray-900);
+  opacity: 0.3;
+}
 .back p,
 .skip p {
   font-family: 'Dela Gothic One', Helvetica;
@@ -247,6 +264,7 @@ button {
 }
 a {
   text-decoration-line: none;
+  color: var(--gray-900);
 }
 a:visited {
   color: var(--grey-900);

@@ -64,6 +64,22 @@ button {
   transition: 0.1s;
 }
 
+.bottom_buttons a {
+  color: var(--gray-900);
+  text-decoration: none;
+}
+
+.bottom_buttons .back,
+.bottom_buttons .skip {
+  color: inherit;
+}
+
+.bottom_buttons .back p,
+.bottom_buttons .skip p {
+  color: var(--gray-900);
+  opacity: 0.3;
+}
+
 .back p,
 .skip p {
   font-family: 'Dela Gothic One', Helvetica;
