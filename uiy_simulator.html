@@ -115,6 +115,7 @@
 
       <div class="buttons">
         <button id="capture"></button>
+        <div class="capture_back"></div>
       </div>
     </div>
 
@@ -234,26 +235,47 @@
     })
 
     // 색상 적용
-    document.querySelectorAll('.con-customize li').forEach((li) => {
-      li.addEventListener('click', () => {
-        let bgColor = window.getComputedStyle(li).backgroundColor
-        if (window.getComputedStyle(li).backgroundImage !== 'none') return
-        let part = model.object3D.getObjectByName('uiy')
-        if (part) {
-          part.material.map = null
-          part.material.color.set(bgColor)
-        }
-      })
-    })
-
-    // 텍스처 적용
     function applyTexture(imgPath) {
-      let texture = new THREE.TextureLoader().load(imgPath, function () {
+      let texture = new THREE.TextureLoader().load(imgPath, function (texture) {
         let part = model.object3D.getObjectByName('uiy')
         if (part) {
           texture.wrapS = THREE.RepeatWrapping
           texture.wrapT = THREE.RepeatWrapping
           texture.flipY = false
+
+          // ✅ 모델별 이미지 방향 보정
+          const urlParams = new URLSearchParams(window.location.search)
+          const modelFile = urlParams.get('model')
+
+          if (modelFile === 'stringbag.glb') {
+            texture.rotation = Math.PI // 180도 회전
+            texture.center.set(0.5, 0.5)
+          } else if (modelFile === 'minibag.glb') {
+            texture.rotation = Math.PI / 2 // 90도 회전
+            texture.center.set(0.5, 0.5)
+          } else {
+            texture.rotation = 0
+          }
+
+          // 기본 반복 비율
+          let repeatX = 1
+          let repeatY = 1
+
+          // 모델에 따라 텍스처 크기 조정
+          const currentSrc = model.getAttribute('src')
+          if (currentSrc.includes('stringbag.glb')) {
+            repeatX = 3 // 숫자를 높일수록 패턴이 작아짐
+            repeatY = 3
+          } else if (currentSrc.includes('minibag.glb')) {
+            repeatX = 2
+            repeatY = 2
+          } else if (currentSrc.includes('cardcase.glb')) {
+            repeatX = 1.2
+            repeatY = 1.2
+          }
+
+          texture.repeat.set(repeatX, repeatY)
+          texture.needsUpdate = true
           part.material.map = texture
           part.material.map.needsUpdate = true
         }
@@ -304,16 +326,29 @@
         croppedCanvas.toBlob(function (blob) {
           let texture = new THREE.TextureLoader().load(
             URL.createObjectURL(blob),
-            function () {
+            function (texture) {
               let part = model.object3D.getObjectByName('uiy')
               if (part) {
                 texture.wrapS = THREE.RepeatWrapping
                 texture.wrapT = THREE.RepeatWrapping
                 texture.flipY = false
-                if (part) {
-                  part.material.map = texture
-                  part.material.map.needsUpdate = true
+
+                // ✅ 모델별 이미지 방향 보정
+                const urlParams = new URLSearchParams(window.location.search)
+                const modelFile = urlParams.get('model')
+
+                if (modelFile === 'stringbag.glb') {
+                  texture.rotation = Math.PI
+                  texture.center.set(0.5, 0.5)
+                } else if (modelFile === 'minibag.glb') {
+                  texture.rotation = Math.PI / 2
+                  texture.center.set(0.5, 0.5)
+                } else {
+                  texture.rotation = 0
                 }
+
+                part.material.map = texture
+                part.material.map.needsUpdate = true
               }
             }
           )
@@ -429,6 +464,20 @@
         canvas.addEventListener('touchend', endDrag)
         canvas.addEventListener('touchcancel', endDrag)
       })
+
+      const infoImage = document.querySelector('.info_con img')
+      const urlParams = new URLSearchParams(window.location.search)
+      const modelFile = urlParams.get('model')
+
+      if (modelFile === 'cardcase.glb') {
+        infoImage.src = 'img/info_01.jpg'
+      } else if (modelFile === 'stringbag.glb') {
+        infoImage.src = 'img/info_02.jpg'
+      } else if (modelFile === 'minibag.glb') {
+        infoImage.src = 'img/info_03.jpg'
+      } else {
+        infoImage.src = 'img/info_default.jpg' // 기본 이미지
+      }
     })
 
     // -------카메라 -------

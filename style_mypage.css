@@ -12,12 +12,16 @@
   background-repeat: repeat;
   overflow: hidden;
   width: 100%;
-  min-height: 900px;
+  min-height: 120%;
   min-width: 402px;
   position: relative;
 }
 
 .mypage_img {
+  position: absolute;
+  top: 88px;
+  left: 0;
+  width: 100%;
   mix-blend-mode: hard-light;
   z-index: 0;
 }

@@ -273,7 +273,7 @@
   width: 736px;
   height: 400px;
   top: 0;
-  left: 392px;
+  right: 10%;
 }
 
 .ipad-pro-home .up-it-yourself {
@@ -481,9 +481,6 @@
   transform: scale(1.05);
 }
 
-.ipad-pro-home .button-next:active {
-  transform: scale(0.9);
-}
 .item,
 .ipad-pro-home .item-2,
 .ipad-pro-home .item-3 {
