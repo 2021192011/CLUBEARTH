@@ -115,7 +115,7 @@
 
       <div class="buttons">
         <button id="capture"></button>
-
+        <div class="capture_back"></div>
       </div>
     </div>
 
@@ -234,6 +234,19 @@
       e.stopPropagation()
     })
 
+    document
+      .querySelectorAll('.con-customize li[class^="color-"]')
+      .forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          let color = window.getComputedStyle(btn).backgroundColor
+          let part = model.object3D.getObjectByName('uiy')
+          if (part) {
+            part.material.map = null
+            part.material.color.set(color)
+          }
+        })
+      })
+
     // 색상 적용
     function applyTexture(imgPath) {
       let texture = new THREE.TextureLoader().load(imgPath, function (texture) {
@@ -257,25 +270,6 @@
             texture.rotation = 0
           }
 
-          // 기본 반복 비율
-          let repeatX = 1
-          let repeatY = 1
-
-          // 모델에 따라 텍스처 크기 조정
-          const currentSrc = model.getAttribute('src')
-          if (currentSrc.includes('stringbag.glb')) {
-            repeatX = 3 // 숫자를 높일수록 패턴이 작아짐
-            repeatY = 3
-          } else if (currentSrc.includes('minibag.glb')) {
-            repeatX = 2
-            repeatY = 2
-          } else if (currentSrc.includes('cardcase.glb')) {
-            repeatX = 1.2
-            repeatY = 1.2
-          }
-
-          texture.repeat.set(repeatX, repeatY)
-          texture.needsUpdate = true
           part.material.map = texture
           part.material.map.needsUpdate = true
         }
@@ -552,4 +546,3 @@
     })
   </script>
 </html>
-
